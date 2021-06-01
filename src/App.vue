@@ -1,30 +1,119 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
-  <router-view />
+  <section :class="`container light_bg pb-12`">
+    <Header />
+    <router-view />
+  </section>
 </template>
 
+<script lang="ts">
+import { defineComponent } from "vue";
+import Header from "./components/Navigation/Header.vue";
+
+export default defineComponent({
+  setup() {
+    return {};
+  },
+  components: {
+    Header,
+  },
+});
+</script>
+
+<style scoped></style>
+
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+@import "./assets/css/icons.css";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,700;1,100;1,400&display=swap");
+
+* {
+  font-family: "Poppins";
 }
 
-#nav {
-  padding: 30px;
+.container {
+  min-width: 100vw;
+  min-height: 100vh;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  @media only screen and (min-width: 480px) {
+    flex-direction: row;
+  }
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+html {
+  background: radial-gradient(
+    circle at top left,
+    #dad4cd 0%,
+    #00c6fb 20%,
+    #005bea 100%
+  );
 }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
+.dark {
+  background: radial-gradient(
+    circle at top right,
+    #014393 0%,
+    #020c6b 20%,
+    #010948 100%
+  );
+}
+
+.glass-error,
+.glass-blue,
+.glass-success,
+.glass-light,
+.glass-gray,
+.glass-dark {
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 10px;
+  z-index: 2;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.glass-dark {
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.glass-blue {
+  border: 2px solid rgba(25, 0, 247, 0.2);
+  background: rgba(25, 0, 247, 0.5);
+}
+
+.glass-success {
+  background: rgba(1, 130, 11, 0.6);
+  border: 2px solid rgba(0, 255, 170, 0.2);
+}
+
+.glass-error {
+  background: rgba(216, 1, 1, 0.6);
+  border: 2px solid rgba(238, 4, 4, 0.2);
+}
+
+.glass-gray {
+  background: rgba(138, 136, 136, 0.2);
+  padding: 15px;
+  border: none;
+}
+
+.slide-fade-enter-active {
+  transition: all 0.3s ease;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter,
+  .slide-fade-leave-to
+
+  /* .slide-fade-leave-active below version 2.1.8 */ {
+  transform: translateY(10px);
+  opacity: 0;
 }
 </style>
