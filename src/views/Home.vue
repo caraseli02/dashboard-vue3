@@ -17,7 +17,7 @@
           <i :class="`gg-${link.iconName}`" />{{ link.text }}
         </router-link>
       </section>
-      <section class="flex flex-col justify-between items-center py-8">
+      <!-- <section class="flex flex-col justify-between items-center py-8">
         <router-link
           v-for="link in links"
           :key="link.iconName"
@@ -26,13 +26,14 @@
         >
           <i :class="`gg-${link.iconName}`" />{{ link.text }}
         </router-link>
-      </section>
+      </section> -->
     </section>
   </article>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { user } from "@/components/auth";
 
 interface Link {
   text: string;
@@ -42,7 +43,10 @@ interface Link {
 
 export default defineComponent({
   name: "Home",
-  data(): { buttons: Link[]; links: Link[] } {
+  setup() {
+    return { user };
+  },
+  data(): { buttons: Link[] } {
     return {
       buttons: [
         {
@@ -56,18 +60,18 @@ export default defineComponent({
           iconName: "profile",
         },
       ],
-      links: [
-        {
-          text: "Inicia sesión",
-          path: "/sign-in",
-          iconName: "profile",
-        },
-        {
-          text: "Regístrate",
-          path: "/sign-up",
-          iconName: "add",
-        },
-      ],
+      // links: [
+      //   {
+      //     text: "Inicia sesión",
+      //     path: "/sign-in",
+      //     iconName: "profile",
+      //   },
+      //   {
+      //     text: "Regístrate",
+      //     path: "/sign-up",
+      //     iconName: "add",
+      //   },
+      // ],
     };
   },
   components: {},

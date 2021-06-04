@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @layer components {
+  .glass {
+    @apply glassmorphism-25 p-3 md:p-6 rounded-lg;
+  }
+
   .btn-home {
     @apply shadow-lg
     bg-secondary
@@ -18,6 +22,44 @@
     rounded-lg
     hover:opacity-50;
   }
+  .btn_auth {
+    @apply appearance-none
+    block
+    w-full
+    px-3
+    py-2
+    border border-gray-300
+    rounded-md
+    placeholder-gray-400
+    focus:outline-none
+    focus:ring-black
+    focus:border-blue-300
+    transition
+    duration-150
+    ease-in-out
+    sm:text-sm
+    sm:leading-5;
+  }
+  .btn-form {
+    @apply w-full
+    flex
+    justify-center
+    py-2
+    px-4
+    border border-transparent
+    text-sm
+    font-medium
+    rounded-md
+    text-primary
+    bg-secondary
+    hover:bg-indigo-500
+    focus:outline-none
+    focus:border-indigo-700
+    focus:ring-indigo-600
+    transition
+    duration-150
+    ease-in-out;
+  }
 }
 
 :root {
@@ -26,7 +68,7 @@
 
 .dark {
   --color-bg-primary: #17224d;
-  --color-bg-secondary: #021e69;
+  --color-bg-secondary: #022177;
   --color-text-primary: #cccccc;
   --color-text-secondary: #9ca3af;
   --color-text-accent: #475886;

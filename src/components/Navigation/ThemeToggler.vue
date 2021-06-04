@@ -24,7 +24,7 @@
       </linearGradient>
     </defs>
   </svg> -->
-  <div id="page" v-bind:class="{ 'theme-dark': nightMode }">
+  <div id="page" :class="nightMode ? 'theme-dark' : ''">
     <input type="checkbox" id="theme-toggle" v-model="nightMode" />
     <label @click="toggleTheme" for="theme-toggle"><span></span></label>
   </div>
@@ -48,7 +48,7 @@ import { defineComponent, ref, onMounted } from "vue";
 export default defineComponent({
   name: "ThemeToggler",
   setup() {
-    const nightMode = ref<boolean>(localStorage.getItem("theme") === "dark");
+    let nightMode = ref<boolean>(localStorage.getItem("theme") === "dark");
 
     const themeInnit = (): void => {
       if (
@@ -57,8 +57,12 @@ export default defineComponent({
           window.matchMedia("(prefers-color-scheme: dark)").matches)
       ) {
         document.querySelector("html")!.classList.add("dark");
+        localStorage.setItem("theme", "dark");
+        nightMode.value = true;
       } else if (localStorage.theme === "dark") {
         document.querySelector("html")!.classList.add("dark");
+        localStorage.setItem("theme", "dark");
+        nightMode.value = true;
       }
     };
 

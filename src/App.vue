@@ -1,20 +1,44 @@
 <template>
   <section :class="`container light_bg pb-12`">
     <Header />
-    <router-view />
+    <!-- <Alerts /> -->
+    <!-- <Sidebar /> -->
+    <main class="container mx-auto py-5 lg:pl-24">
+      <router-view v-slot="{ Component }">
+        <transition name="slide-fade" mode="out-in">
+          <component :is="Component" />
+        </transition>
+      </router-view>
+    </main>
+    <div
+      v-if="user"
+      :class="`glass-blue fixed bottom-0 w-full rounded-none rounded-t-lg
+            lg:w-20 lg:h-full lg:rounded-r-lg lg:rounded-t-none
+            `"
+    >
+      <MainNav />
+    </div>
   </section>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { user } from "@/components/auth";
 import Header from "./components/Navigation/Header.vue";
+import MainNav from "@/components/dashboard/MainNav.vue";
+// import Alerts from "@/components/alert/Alerts.vue";
+
+// import Sidebar from "./components/Sidebar.vue";
 
 export default defineComponent({
   setup() {
-    return {};
+    return { user };
   },
   components: {
     Header,
+    MainNav,
+    // Alerts,
+    // Sidebar,
   },
 });
 </script>

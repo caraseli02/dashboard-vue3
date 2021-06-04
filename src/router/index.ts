@@ -1,5 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
+import { watch } from "vue";
 import Home from "../views/Home.vue";
+import { user, initialised } from "@/components/auth";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -8,19 +10,66 @@ const routes: Array<RouteRecordRaw> = [
     component: Home,
   },
   {
-    path: "/about",
-    name: "About",
+    path: "/dashboard",
+    name: "Dashboard",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue"),
+      import(/* webpackChunkName: "about" */ "../views/Dashboard.vue"),
+  },
+  {
+    path: "/users",
+    name: "Users",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/Users.vue"),
+  },
+  {
+    path: "/sign-in",
+    name: "Login",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../components/auth/SignIn.vue"),
+    meta: {
+      public: true,
+    },
+  },
+  {
+    path: "/sign-up",
+    name: "Register",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../components/auth/SignUp.vue"),
+    meta: {
+      public: true,
+    },
   },
 ];
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
+});
+
+router.beforeEach((to, _, next) => {
+  if (initialised.value) {
+    if (!to.matched.some((record) => record.meta.public) && !user.value) {
+      return next("/sign-in");
+    }
+
+    next();
+  } else {
+    watch(
+      () => initialised.value,
+      (newVal) => {
+        if (newVal) {
+          if (!to.matched.some((record) => record.meta.public) && !user.value) {
+            return next("/sign-in");
+          }
+
+          next();
+        }
+      }
+    );
+  }
 });
 
 export default router;

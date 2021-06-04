@@ -3,18 +3,18 @@
     <div class="mx-auto flex justify-center items-center">
       <nav class="flex items-center justify-between md:justify-between w-full">
         <!-- PROFILE ICON FOR OPEN/CLOSE SIDEBAR -->
-        <div v-if="user" @click="toggleSidebar" class="flex items-center ml-2">
+        <!-- <div v-if="user" @click="toggleSidebar" class="flex items-center ml-2">
           <button
             class="flex justify-center items-center p-3 rounded-lg z-20"
             :class="showSidebar ? 'bg-gray-300' : 'text-primary bg-primary'"
             aria-label="Open Menu"
           ></button>
-        </div>
+        </div> -->
         <!-- Home, Sing-In Sign-Up Btn -->
         <section class="flex justify-between items-center">
           <span v-for="link in links" :key="link.name">
             <router-link
-              :to="link.to"
+              :to="{ name: link.to }"
               class="
                 ml-2
                 flex
@@ -25,7 +25,7 @@
                 text-primary
                 bg-primary
               "
-              v-if="!user && $route.path !== link.to"
+              v-if="$route.name !== link.to && !user"
               >{{ link.name }}
             </router-link>
           </span>
@@ -35,7 +35,7 @@
         <div class="flex justify-end items-center w-40">
           <ThemeToggler class="mr-10" />
           <button
-            @click="closeSession"
+            @click="logout"
             class="
               flex
               justify-center
@@ -50,6 +50,7 @@
             v-if="user"
           >
             Salir
+            <i class="gg-log-off ml-3"></i>
           </button>
         </div>
       </nav>
@@ -60,6 +61,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import ThemeToggler from "@/components/Navigation/ThemeToggler.vue";
+import { user, logout } from "@/components/auth";
 // import { mapGetters, mapActions, mapState } from "vuex";
 
 interface Link {
@@ -69,20 +71,23 @@ interface Link {
 
 export default defineComponent({
   name: "Header",
+  setup() {
+    return { user, logout };
+  },
   data(): { links: Link[] } {
     return {
       links: [
-        {
-          name: "Inicio",
-          to: "/",
-        },
+        // {
+        //   name: "Inicio",
+        //   to: "Home",
+        // },
         {
           name: "Entrar",
-          to: "/sign-in",
+          to: "Login",
         },
         {
           name: "Registrate",
-          to: "/sign-up",
+          to: "Register",
         },
       ],
     };
