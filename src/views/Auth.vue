@@ -26,17 +26,22 @@
       </ul>
     </div>
     <SignIn :isLogin="isLogin" />
+    <teleport to="#messages">
+      <Messager />
+    </teleport>
   </section>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 import SignIn from "@/components/auth/SignIn.vue";
+import Messager from "@/components/Messager.vue";
 
 export default defineComponent({
   name: "Auth",
   components: {
     SignIn,
+    Messager,
   },
   setup() {
     const isLogin = ref<boolean>(true);

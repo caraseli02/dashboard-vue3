@@ -26,11 +26,41 @@ defineRule("confirmPassword", (value, [target], ctx) => {
     return true;
   }
 
-  return "Las contraseñas no coinciden";
+  return "Mínimo 6 caracteres. Máximo 30 caracteres";
 });
 
 defineRule("name", (value) => {
-  return max(value, { length: 60 })
-    ? true
-    : "Name may not exceed 60 characters";
+  if (
+    required(value) &&
+    min(value, { length: 3 }) &&
+    max(value, { length: 30 })
+  ) {
+    return true;
+  }
+
+  return "Mínimo 3 caracteres. Máximo 30 caracteres";
+});
+
+defineRule("surname", (value) => {
+  if (
+    required(value) &&
+    min(value, { length: 3 }) &&
+    max(value, { length: 30 })
+  ) {
+    return true;
+  }
+
+  return "Mínimo 3 caracteres. Máximo 30 caracteres";
+});
+
+defineRule("dni", (value) => {
+  if (
+    required(value) &&
+    min(value, { length: 6 }) &&
+    max(value, { length: 12 })
+  ) {
+    return true;
+  }
+
+  return "Mínimo 6 caracteres. Máximo 12 caracteres";
 });

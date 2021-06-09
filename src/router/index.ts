@@ -81,9 +81,8 @@ const router = createRouter({
 router.beforeEach((to, _, next) => {
   if (initialised.value) {
     if (!to.matched.some((record) => record.meta.public) && !user.value) {
-      return next("/sign-in");
+      return next("/auth");
     }
-
     next();
   } else {
     watch(

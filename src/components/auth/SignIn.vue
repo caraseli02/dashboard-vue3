@@ -84,6 +84,107 @@
           {{ confirmPasswordField.errorMessage || "Debe rellenar este campo" }}
         </p>
       </div>
+      <div>
+        <label
+          for="Name"
+          class="flex text-sm font-medium leading-5 text-secondary my-2"
+          >Nombre *
+        </label>
+        <input
+          id="Name"
+          class="btn_auth"
+          type="text"
+          placeholder="Nombre *"
+          @input="nameField.handleChange"
+          @blur="nameField.handleBlur"
+          :value="nameField.value"
+        />
+        <p
+          :style="{
+            visibility:
+              nameField.meta.touched && !nameField.meta.valid
+                ? 'visible'
+                : 'hidden',
+          }"
+          class="text-yellow-500"
+        >
+          {{ nameField.errorMessage || "Debe rellenar este campo" }}
+        </p>
+      </div>
+      <div>
+        <label
+          for="Surname"
+          class="flex text-sm font-medium leading-5 text-secondary my-2"
+          >Apellido *
+        </label>
+        <input
+          id="Surname"
+          class="btn_auth"
+          type="text"
+          placeholder="Apellido *"
+          @input="surnameField.handleChange"
+          @blur="surnameField.handleBlur"
+          :value="surnameField.value"
+        />
+        <p
+          :style="{
+            visibility:
+              surnameField.meta.touched && !surnameField.meta.valid
+                ? 'visible'
+                : 'hidden',
+          }"
+          class="text-yellow-500"
+        >
+          {{ surnameField.errorMessage || "Debe rellenar este campo" }}
+        </p>
+      </div>
+      <div>
+        <label
+          for="DNI"
+          class="flex text-sm font-medium leading-5 text-secondary my-2"
+          >DNI / NIE *
+        </label>
+        <input
+          id="DNI"
+          class="btn_auth"
+          type="text"
+          placeholder="DNI / NIE *"
+          @input="dniField.handleChange"
+          @blur="dniField.handleBlur"
+          :value="dniField.value"
+        />
+        <p
+          :style="{
+            visibility:
+              dniField.meta.touched && !dniField.meta.valid
+                ? 'visible'
+                : 'hidden',
+          }"
+          class="text-yellow-500"
+        >
+          {{ dniField.errorMessage || "Debe rellenar este campo" }}
+        </p>
+      </div>
+      <div class="flex mt-6 text-primary">
+        <label class="flex items-center"
+          ><input
+            required="required"
+            type="checkbox"
+            class="form-checkbox"
+            v-model="acceptTerms"
+          /><span class="ml-2"
+            >¿ He leído y acepto los
+            <a href="/terminos-y-condiciones" class="font-bold text-secondary"
+              >Términos y condiciones
+            </a>
+            y la
+            <a href="/politica-privacidad/" class="font-bold text-secondary">
+              Política de privacidad</a
+            >
+            ?
+          </span></label
+        >
+      </div>
     </template>
 
     <button
@@ -188,7 +289,6 @@ import ForgotPassword from "@/components/auth/ForgotPassword.vue";
 import { watch, defineComponent, reactive, computed } from "vue";
 // SETUP
 import { user, google, showForgotPopUp } from ".";
-import router from "@/router";
 // TS INTERFACE
 import IFormSchema from "@/components/auth/interface";
 import { useField, useForm } from "vee-validate";
@@ -212,10 +312,13 @@ export default defineComponent({
   emits: {
     submitAuth: null, // null means we will not validate event
   },
-  setup(props, { emit }) {
+  setup(props) {
     const { meta: formMeta, handleSubmit } = useForm();
     const emailField = reactive(useField("email", "email"));
     const passwordField = reactive(useField("password", "password"));
+    const nameField = reactive(useField("name", "name"));
+    const surnameField = reactive(useField("surname", "surname"));
+    const dniField = reactive(useField("dni", "dni"));
     const confirmPasswordValidator = computed(() => {
       return !props.isLogin ? "confirmPassword:password" : () => true;
     });
@@ -229,58 +332,25 @@ export default defineComponent({
       }
     );
     const submitForm = handleSubmit((formValues) => {
-      login(formValues.email, formValues.password);
+      // login(formValues.email, formValues.password);
+      console.log(formValues);
     });
     return {
       emailField,
       passwordField,
+      nameField,
+      surnameField,
+      dniField,
       confirmPasswordField,
       submitForm,
       formMeta,
       showForgotPopUp,
     };
   },
+  data() {
+    return {
+      acceptTerms: false,
+    };
+  },
 });
-
-// export default {
-//   data() {
-//     return {
-//       email: "",
-//       password: "",
-//       error: null,
-//       showForgotPopUp: false,
-//     };
-//   },
-//   components: { ForgotPassword },
-//   computed: {
-//     // mix the getters into computed with object spread operator
-//     // ...mapGetters("notifi", ["notificationMessage"]),
-//     // ...mapGetters({ theme: "theme/getTheme" }),
-//   },
-//   methods: {
-//     // ...mapActions("auth", ["signInAction"]),
-//     // ...mapActions("notifi", ["showNotification"]),
-//     async signIn() {
-//       //   this.error = null;
-//       //   var pattern = /^\w+@apimosa.es$/;
-//       //   if (!pattern.test(this.email) && this.email !== "vladwebapp@gmail.com") {
-//       //     this.$alert("Solo se acceptan corros de @apimosa", "warning");
-//       //     return;
-//       //   }
-//       //   await this.signInAction({
-//       //     email: this.email,
-//       //     password: this.password,
-//       //   })
-//       //     .then(() => {
-//       //       if (this.notificationMessage) {
-//       //         return;
-//       //       }
-//       //       this.$router.replace("dashboard");
-//       //     })
-//       //     .catch(error => {
-//       //       console.log(error);
-//       //     });
-//     },
-//   },
-// };
 </script>

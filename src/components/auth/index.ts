@@ -5,6 +5,7 @@ import { ref } from "vue";
 import authValues from "@/components/auth/interface";
 import { data } from "@/firebase-errors.json";
 import { userColection } from "./db";
+import router from "@/router";
 
 export const user = ref<firebase.User | null>(null);
 export const email = ref<string | null>(null);
@@ -23,6 +24,11 @@ auth.onAuthStateChanged((u) => {
 
 auth.onAuthStateChanged((u) => {
   user.value = u;
+  if (u) {
+    router.push("/dashboard");
+  } else {
+    router.push("/auth");
+  }
 });
 
 export async function logout(): Promise<void> {
@@ -74,7 +80,7 @@ export async function signup(payload: authValues): Promise<void> {
   });
 
   const actionCodeSettings = {
-    url: `${process.env.VUE_APP_HOST_NAME}sign-in/?email=${user.value.email}`,
+    url: `${process.env.VUE_APP_HOST_NAME}auth/?email=${user.value.email}`,
   };
   user.value.sendEmailVerification(actionCodeSettings);
 }
