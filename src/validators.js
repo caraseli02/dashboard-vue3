@@ -64,3 +64,11 @@ defineRule("dni", (value) => {
 
   return "Mínimo 6 caracteres. Máximo 12 caracteres";
 });
+
+defineRule("workplace", (value) => {
+  if (required(value)) {
+    return true;
+  }
+
+  return "Elige centro de trabajo";
+});

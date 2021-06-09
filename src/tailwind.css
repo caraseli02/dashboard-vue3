@@ -61,6 +61,22 @@
     shadow-lg
     w-1/2;
   }
+  .selectForm {
+    @apply block
+            appearance-none
+            w-full
+            bg-primary
+            border border-gray-200
+            text-secondary
+            py-3
+            px-4
+            pr-8
+            rounded
+            leading-tight
+            focus:outline-none
+            focus:bg-secondary
+            focus:border-gray-500;
+  }
 }
 
 :root {

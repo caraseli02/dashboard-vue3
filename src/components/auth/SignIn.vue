@@ -165,7 +165,62 @@
           {{ dniField.errorMessage || "Debe rellenar este campo" }}
         </p>
       </div>
-      <div class="flex mt-6 text-primary">
+      <div class="relative">
+        <label
+          for="workplace"
+          class="block mb-2 uppercase tracking-wide text-secondary text-xs mt-4"
+        >
+          Centro de Trabajo </label
+        ><select
+          class="selectForm"
+          name="workplace"
+          @input="workplaceField.handleChange"
+          @blur="workplaceField.handleBlur"
+          :value="workplaceField.value"
+        >
+          <option
+            v-for="workplace in workplaceList"
+            :key="workplace"
+            :value="workplace"
+          >
+            {{ workplace }}
+          </option>
+        </select>
+        <div
+          class="
+            pointer-events-none
+            absolute
+            inset-y-0
+            right-0
+            flex
+            items-center
+            px-2
+            text-secondary
+          "
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            class="fill-current h-8 w-8 mt-2"
+          >
+            <path
+              d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+            ></path>
+          </svg>
+        </div>
+        <p
+          :style="{
+            visibility:
+              workplaceField.meta.touched && !workplaceField.meta.valid
+                ? 'visible'
+                : 'hidden',
+          }"
+          class="text-yellow-500"
+        >
+          {{ dniField.errorMessage || "Debe rellenar este campo" }}
+        </p>
+      </div>
+      <div class="flex mt-2 text-primary">
         <label class="flex items-center"
           ><input
             required="required"
@@ -173,26 +228,28 @@
             class="form-checkbox"
             v-model="acceptTerms"
           /><span class="ml-2"
-            >¿ He leído y acepto los
+            >He leído y acepto los
             <a href="/terminos-y-condiciones" class="font-bold text-secondary"
               >Términos y condiciones
             </a>
             y la
             <a href="/politica-privacidad/" class="font-bold text-secondary">
-              Política de privacidad</a
-            >
-            ?
+              Política de privacidad
+            </a>
           </span></label
         >
       </div>
     </template>
-
+    <span class="text-yellow-500 mt-2" v-if="!acceptTerms && !isLogin"
+      >Accepta los terminos y condiciones</span
+    >
     <button
-      class="btn-form uppercase"
-      :disabled="!formMeta.valid"
+      v-if="acceptTerms || isLogin"
+      class="btn-form uppercase mt-4"
       @click="submitForm"
     >
       <span>{{ isLogin ? "Entrar" : "Activar" }}</span>
+      <span></span>
       <!-- <Loader
           v-if="isSubmitting"
           class="animate-spin stroke-current text-white ml-2"
@@ -292,7 +349,8 @@ import { user, google, showForgotPopUp } from ".";
 // TS INTERFACE
 import IFormSchema from "@/components/auth/interface";
 import { useField, useForm } from "vee-validate";
-import { login } from "@/components/auth/index";
+import { login, signup } from "@/components/auth/index";
+import { workplaceList } from "@/components/auth/db";
 
 export default defineComponent({
   name: "LoginForm",
@@ -316,24 +374,47 @@ export default defineComponent({
     const { meta: formMeta, handleSubmit } = useForm();
     const emailField = reactive(useField("email", "email"));
     const passwordField = reactive(useField("password", "password"));
-    const nameField = reactive(useField("name", "name"));
-    const surnameField = reactive(useField("surname", "surname"));
-    const dniField = reactive(useField("dni", "dni"));
+
     const confirmPasswordValidator = computed(() => {
       return !props.isLogin ? "confirmPassword:password" : () => true;
+    });
+    const workplaceValidator = computed(() => {
+      return !props.isLogin ? "workplace:workplace" : () => true;
+    });
+    const nameValidator = computed(() => {
+      return !props.isLogin ? "name:name" : () => true;
+    });
+    const surnameValidator = computed(() => {
+      return !props.isLogin ? "surname:surname" : () => true;
     });
     const confirmPasswordField = reactive(
       useField("confirmPassword", confirmPasswordValidator)
     );
+    const dniValidator = computed(() => {
+      return !props.isLogin ? "dni:dni" : () => true;
+    });
+    const workplaceField = reactive(useField("workplace", workplaceValidator));
+    const nameField = reactive(useField("name", nameValidator));
+    const surnameField = reactive(useField("surname", surnameValidator));
+    const dniField = reactive(useField("dni", dniValidator));
+
     watch(
       () => props.isLogin,
       () => {
         confirmPasswordField.validate();
+        nameField.validate();
+        surnameField.validate();
+        dniField.validate();
+        workplaceField.validate();
       }
     );
     const submitForm = handleSubmit((formValues) => {
-      // login(formValues.email, formValues.password);
-      console.log(formValues);
+      if (props.isLogin) {
+        login(formValues.email, formValues.password);
+      }
+      // if (!props.isLogin) {
+      //   signup(formValues)
+      // }
     });
     return {
       emailField,
@@ -341,10 +422,12 @@ export default defineComponent({
       nameField,
       surnameField,
       dniField,
+      workplaceField,
       confirmPasswordField,
       submitForm,
       formMeta,
       showForgotPopUp,
+      workplaceList,
     };
   },
   data() {
