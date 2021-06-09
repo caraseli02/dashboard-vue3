@@ -6,7 +6,7 @@ defineRule("email", (value) => {
     return true;
   }
 
-  return "A valid email address is required";
+  return "Por favor introduzca un email valido";
 });
 
 defineRule("password", (value) => {
@@ -18,7 +18,7 @@ defineRule("password", (value) => {
     return true;
   }
 
-  return "Password must be between 6 and 30 characters";
+  return "Mínimo 6 / Máximo 30";
 });
 
 defineRule("confirmPassword", (value, [target], ctx) => {
@@ -26,7 +26,7 @@ defineRule("confirmPassword", (value, [target], ctx) => {
     return true;
   }
 
-  return "Passwords must match";
+  return "Las contraseñas no coinciden";
 });
 
 defineRule("name", (value) => {

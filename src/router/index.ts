@@ -25,19 +25,10 @@ const routes: Array<RouteRecordRaw> = [
       import(/* webpackChunkName: "about" */ "../views/Users.vue"),
   },
   {
-    path: "/sign-in",
-    name: "Login",
+    path: "/auth",
+    name: "Auth",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../components/auth/SignIn.vue"),
-    meta: {
-      public: true,
-    },
-  },
-  {
-    path: "/sign-up",
-    name: "Register",
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../components/auth/SignUp.vue"),
+      import(/* webpackChunkName: "about" */ "../views/Auth.vue"),
     meta: {
       public: true,
     },
@@ -100,7 +91,7 @@ router.beforeEach((to, _, next) => {
       (newVal) => {
         if (newVal) {
           if (!to.matched.some((record) => record.meta.public) && !user.value) {
-            return next("/sign-in");
+            return next("/auth");
           }
 
           next();

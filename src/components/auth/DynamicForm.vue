@@ -45,7 +45,7 @@
           "
           name="workplace"
           as="select"
-          >>
+        >
           <option
             v-for="workplace in workplaceList"
             :key="workplace"
