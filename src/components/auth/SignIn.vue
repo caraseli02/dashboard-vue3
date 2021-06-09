@@ -412,9 +412,9 @@ export default defineComponent({
       if (props.isLogin) {
         login(formValues.email, formValues.password);
       }
-      // if (!props.isLogin) {
-      //   signup(formValues)
-      // }
+
+      console.log(formValues);
+      signup(formValues);
     });
     return {
       emailField,

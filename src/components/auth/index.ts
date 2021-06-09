@@ -56,7 +56,7 @@ export async function login(email: string, password: string): Promise<void> {
   }
 }
 
-export async function signup(payload: authValues): Promise<void> {
+export async function signup(payload: Record<string, any>): Promise<void> {
   console.log(payload);
 
   const creds = await auth.createUserWithEmailAndPassword(
@@ -72,7 +72,7 @@ export async function signup(payload: authValues): Promise<void> {
     email: creds.user.email,
     name: payload.name,
     surname: payload.surname,
-    dni: payload.dniNie,
+    dni: payload.dni,
     workplace: payload.workplace,
     schedule: "40",
     eatHour: true,
