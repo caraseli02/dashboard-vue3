@@ -1,11 +1,10 @@
 import firebase from "firebase/app";
 import "firebase/auth";
-import { auth, db } from "@/firebaseDatabase";
+import { auth } from "@/firebaseDatabase";
 import { ref } from "vue";
 import authValues from "@/components/auth/interface";
 import { data } from "@/firebase-errors.json";
-
-const userColection = db.collection("attendanceUsers");
+import { userColection } from "./db";
 
 export const user = ref<firebase.User | null>(null);
 export const email = ref<string | null>(null);
@@ -14,6 +13,8 @@ export const password = ref<string | null>(null);
 export const initialised = ref<boolean>(false);
 
 export const errorMessage = ref<string | null>(null);
+
+export const showForgotPopUp = ref<boolean>(false);
 
 auth.onAuthStateChanged((u) => {
   // ...
@@ -77,8 +78,6 @@ export async function signup(payload: authValues): Promise<void> {
   };
   user.value.sendEmailVerification(actionCodeSettings);
 }
-
-export const showForgotPopUp = ref<boolean>(false);
 
 export async function resetPassword(email: string): Promise<void> {
   firebase

@@ -42,6 +42,44 @@ const routes: Array<RouteRecordRaw> = [
       public: true,
     },
   },
+  {
+    path: "/aviso-legal",
+    name: "aviso-legal",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "@/views/Legal/avisoLegal.vue"),
+    meta: {
+      public: true,
+    },
+  },
+  {
+    path: "/politica-privacidad",
+    name: "pPrivacidad",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "@/views/Legal/pPrivacidad.vue"),
+    meta: {
+      public: true,
+    },
+  },
+  {
+    path: "/politica-de-cookies",
+    name: "pCookies",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "@/views/Legal/pCookies.vue"),
+    meta: {
+      public: true,
+    },
+  },
+  {
+    path: "/terminos-y-condiciones",
+    name: "terCondiciones",
+    component: () =>
+      import(
+        /* webpackChunkName: "about" */ "@/views/Legal/terCondiciones.vue"
+      ),
+    meta: {
+      public: true,
+    },
+  },
 ];
 
 const router = createRouter({

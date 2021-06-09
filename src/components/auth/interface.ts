@@ -1,3 +1,4 @@
+import firebase from "firebase/app";
 // The field schema shape
 export default interface IFieldSchema {
   as: string;
@@ -24,4 +25,8 @@ export default interface authValues {
   surname?: string;
   dni?: string;
   workplace?: string;
+}
+
+export default interface IFirebaseDoc {
+  doc: firebase.firestore.QuerySnapshot<firebase.firestore.DocumentData>;
 }

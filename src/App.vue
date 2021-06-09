@@ -3,7 +3,7 @@
     <Header />
     <!-- <Alerts /> -->
     <!-- <Sidebar /> -->
-    <main class="container mx-auto py-5 lg:pl-24">
+    <main :class="user ? 'lg:pl-24' : ''" class="container mx-auto py-5">
       <router-view v-slot="{ Component }">
         <transition name="slide-fade" mode="out-in">
           <component :is="Component" />

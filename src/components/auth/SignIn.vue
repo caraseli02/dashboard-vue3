@@ -108,13 +108,17 @@
           <div class="text-lg leading-5 mt-4 text-center glass">
             <button
               class="
-                font-medium
-                text-xs text-primary
+                text-base text-primary
                 focus:outline-none
                 focus:underline
                 transition
                 ease-in-out
                 duration-150
+                hover:opacity-50
+                bg-secondary
+                shadow-lg
+                p-2
+                rounded-lg
               "
               @click="showForgotPopUp = !showForgotPopUp"
             >
@@ -218,6 +222,12 @@ export default defineComponent({
     loginReturnUrl: { type: String, default: "/dashboard" },
   },
   setup(props) {
+    const emailRules = function (email: string) {
+      var pattern = /^\w+@apimosa.es$/;
+      if (!pattern.test(email) && email !== "vladwebapp@gmail.com") {
+        return "Solo se acceptan corros de @apimosa";
+      }
+    };
     const formSchema = {
       fields: [
         {
