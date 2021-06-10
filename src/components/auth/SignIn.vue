@@ -337,6 +337,9 @@
       Regístrate
     </div>
   </div>
+  <teleport to="#messages">
+    <Messager />
+  </teleport>
 </template>
 
 <script lang="ts">
@@ -352,10 +355,13 @@ import { useField, useForm } from "vee-validate";
 import { login, signup } from "@/components/auth/index";
 import { workplaceList } from "@/components/auth/db";
 
+import Messager from "@/components/Messager.vue";
+
 export default defineComponent({
   name: "LoginForm",
   components: {
     ForgotPassword,
+    Messager,
   },
   props: {
     isLogin: {
@@ -412,9 +418,9 @@ export default defineComponent({
       if (props.isLogin) {
         login(formValues.email, formValues.password);
       }
-
-      console.log(formValues);
-      signup(formValues);
+      if (!props.isLogin) {
+        signup(formValues);
+      }
     });
     return {
       emailField,

@@ -57,32 +57,34 @@ export async function login(email: string, password: string): Promise<void> {
 }
 
 export async function signup(payload: Record<string, any>): Promise<void> {
-  console.log(payload);
+  try {
+    const creds = await auth.createUserWithEmailAndPassword(
+      payload.email,
+      payload.password
+    );
 
-  const creds = await auth.createUserWithEmailAndPassword(
-    payload.email,
-    payload.password
-  );
+    if (!creds.user) throw Error("Signup failed");
 
-  if (!creds.user) throw Error("Signup failed");
+    user.value = creds.user;
 
-  user.value = creds.user;
+    userColection.doc(creds.user.uid).set({
+      email: creds.user.email,
+      name: payload.name,
+      surname: payload.surname,
+      dni: payload.dni,
+      workplace: payload.workplace,
+      schedule: "40",
+      eatHour: true,
+      author: creds.user.uid,
+    });
 
-  userColection.doc(creds.user.uid).set({
-    email: creds.user.email,
-    name: payload.name,
-    surname: payload.surname,
-    dni: payload.dni,
-    workplace: payload.workplace,
-    schedule: "40",
-    eatHour: true,
-    author: creds.user.uid,
-  });
-
-  const actionCodeSettings = {
-    url: `${process.env.VUE_APP_HOST_NAME}auth/?email=${user.value.email}`,
-  };
-  user.value.sendEmailVerification(actionCodeSettings);
+    const actionCodeSettings = {
+      url: `${process.env.VUE_APP_HOST_NAME}auth/?email=${user.value.email}`,
+    };
+    user.value.sendEmailVerification(actionCodeSettings);
+  } catch (error) {
+    errorMessage.value = getValueByKey(data, error.code);
+  }
 }
 
 export async function resetPassword(email: string): Promise<void> {
