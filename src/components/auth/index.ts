@@ -43,8 +43,18 @@ function getValueByKey(obj: { [key: string]: string }, key: string): string {
   return obj[key];
 }
 
-export async function login(email: string, password: string): Promise<void> {
-  //   console.log(email, password);
+const emailRules = function (email: string) {
+  const pattern = /^\w+@apimosa.es$/;
+  return !pattern.test(email) && email !== "vladwebapp@gmail.com";
+};
+
+export async function login(
+  email: string,
+  password: string
+): Promise<void | string> {
+  if (emailRules(email)) {
+    return (errorMessage.value = "Solo se acceptan corros de @apimosa");
+  }
   try {
     const resp = await auth.signInWithEmailAndPassword(email, password);
 

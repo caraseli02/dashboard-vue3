@@ -6,7 +6,7 @@ defineRule("email", (value) => {
     return true;
   }
 
-  return "Por favor introduzca un email valido";
+  return "Email no valido. Solo @apimosa se acceptan.";
 });
 
 defineRule("password", (value) => {
