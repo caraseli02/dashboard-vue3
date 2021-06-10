@@ -12,23 +12,6 @@
         </div> -->
         <!-- Home, Sing-In Sign-Up Btn -->
         <section class="flex justify-between items-center">
-          <span v-for="link in links" :key="link.name">
-            <router-link
-              :to="{ name: link.to }"
-              class="
-                ml-2
-                flex
-                justify-center
-                items-center
-                p-2
-                rounded-lg
-                text-primary
-                bg-primary
-              "
-              v-if="$route.name !== link.to && !user"
-              >{{ link.name }}
-            </router-link>
-          </span>
           <!-- Side Bar -->
         </section>
         <!-- LOGOUT, ThemeToggler Btn -->
@@ -73,24 +56,6 @@ export default defineComponent({
   name: "Header",
   setup() {
     return { user, logout };
-  },
-  data(): { links: Link[] } {
-    return {
-      links: [
-        // {
-        //   name: "Inicio",
-        //   to: "Home",
-        // },
-        {
-          name: "Entrar",
-          to: "Login",
-        },
-        {
-          name: "Registrate",
-          to: "Register",
-        },
-      ],
-    };
   },
   components: { ThemeToggler },
   computed: {

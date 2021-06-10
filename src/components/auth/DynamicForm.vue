@@ -45,13 +45,14 @@
           "
           name="workplace"
           as="select"
-          >>
-          <option value="Palma">Palma de Mallorca</option>
-          <option value="Sevilla">Sevilla</option>
-          <option value="Valencia">Valencia</option>
-          <option value="Malaga">Malaga</option>
-          <option value="Tenerife">Tenerife</option>
-          <option value="Ibiza">Ibiza</option>
+        >
+          <option
+            v-for="workplace in workplaceList"
+            :key="workplace"
+            :value="workplace"
+          >
+            {{ workplace }}
+          </option>
         </Field>
         <div
           class="
@@ -104,6 +105,7 @@
 import { defineComponent, PropType, ref } from "vue";
 import { Form, Field, ErrorMessage } from "vee-validate";
 import { signup, login, email, password } from ".";
+import { workplaceList } from "@/components/auth/db";
 import IFormSchema from "@/components/auth/interface";
 import authValues from "@/components/auth/interface";
 import Messager from "@/components/Messager.vue";
@@ -113,9 +115,17 @@ export default defineComponent({
   name: "DynamicForm",
   setup() {
     const route = useRoute();
-    const onSubmit = (values: authValues) => {
+    const emailRules = function (email: string) {
+      var pattern = /^\w+@apimosa.es$/;
+      if (!pattern.test(email) && email !== "vladwebapp@gmail.com") {
+        console.log("fail");
+        return "Solo se acceptan corros de @apimosa";
+      }
+    };
+    const onSubmit = async (values: authValues) => {
       // login(values.email, values.password);
       if (route.name === "Login") {
+        await emailRules(values.email);
         login(values.email, values.password);
       }
       if (route.name === "Register") {
@@ -125,7 +135,7 @@ export default defineComponent({
         signup(values);
       }
     };
-    return { login, email, password, onSubmit };
+    return { login, email, password, onSubmit, workplaceList };
   },
   components: {
     Form,

@@ -25,19 +25,48 @@ const routes: Array<RouteRecordRaw> = [
       import(/* webpackChunkName: "about" */ "../views/Users.vue"),
   },
   {
-    path: "/sign-in",
-    name: "Login",
+    path: "/auth",
+    name: "Auth",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../components/auth/SignIn.vue"),
+      import(/* webpackChunkName: "about" */ "../views/Auth.vue"),
     meta: {
       public: true,
     },
   },
   {
-    path: "/sign-up",
-    name: "Register",
+    path: "/aviso-legal",
+    name: "aviso-legal",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../components/auth/SignUp.vue"),
+      import(/* webpackChunkName: "about" */ "@/views/Legal/avisoLegal.vue"),
+    meta: {
+      public: true,
+    },
+  },
+  {
+    path: "/politica-privacidad",
+    name: "pPrivacidad",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "@/views/Legal/pPrivacidad.vue"),
+    meta: {
+      public: true,
+    },
+  },
+  {
+    path: "/politica-de-cookies",
+    name: "pCookies",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "@/views/Legal/pCookies.vue"),
+    meta: {
+      public: true,
+    },
+  },
+  {
+    path: "/terminos-y-condiciones",
+    name: "terCondiciones",
+    component: () =>
+      import(
+        /* webpackChunkName: "about" */ "@/views/Legal/terCondiciones.vue"
+      ),
     meta: {
       public: true,
     },
@@ -52,9 +81,8 @@ const router = createRouter({
 router.beforeEach((to, _, next) => {
   if (initialised.value) {
     if (!to.matched.some((record) => record.meta.public) && !user.value) {
-      return next("/sign-in");
+      return next("/auth");
     }
-
     next();
   } else {
     watch(
@@ -62,7 +90,7 @@ router.beforeEach((to, _, next) => {
       (newVal) => {
         if (newVal) {
           if (!to.matched.some((record) => record.meta.public) && !user.value) {
-            return next("/sign-in");
+            return next("/auth");
           }
 
           next();
