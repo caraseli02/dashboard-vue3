@@ -2,7 +2,9 @@
 
 describe("My First Test", () => {
   it("Visits the app root url", () => {
+    const { username, password } = ["test@test.com", "123456"];
+    print(username, password);
     cy.visit("/");
-    cy.contains("h1", "Welcome to Your Vue.js + TypeScript App");
+    cy.url().should("include", "/auth");
   });
 });
