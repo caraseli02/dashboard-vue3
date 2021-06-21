@@ -18,17 +18,4 @@ const getWorkplaces = docRef
     console.log("Error getting document:", error);
   });
 
-// async function getData() {
-//   await db
-//     .collection("workplaceList")
-//     .get()
-//     .then((querySnapshot) => {
-//       const data = querySnapshot.docs.map((doc) => doc.data());
-//       return data;
-
-//       // do something with documents
-//     });
-// }
 console.log(workplaceList);
-
-// console.log(workplaceList.value);

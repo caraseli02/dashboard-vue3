@@ -19,6 +19,7 @@
           <ThemeToggler class="mr-10" />
           <button
             @click="logout"
+            id="btnLogout"
             class="
               flex
               justify-center
@@ -44,7 +45,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import ThemeToggler from "@/components/Navigation/ThemeToggler.vue";
-import { user, logout } from "@/components/auth";
+import { user, logout } from "@/components/auth/store";
 // import { mapGetters, mapActions, mapState } from "vuex";
 
 interface Link {

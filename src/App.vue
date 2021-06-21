@@ -1,7 +1,6 @@
 <template>
   <section :class="`container light_bg pb-12`">
     <Header />
-    <!-- <Alerts /> -->
     <!-- <Sidebar /> -->
     <main :class="user ? 'lg:pl-24' : ''" class="container mx-auto py-5">
       <router-view v-slot="{ Component }">
@@ -23,10 +22,9 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { user } from "@/components/auth";
+import { user } from "@/components/auth/store";
 import Header from "./components/Navigation/Header.vue";
 import MainNav from "@/components/dashboard/MainNav.vue";
-// import Alerts from "@/components/alert/Alerts.vue";
 
 // import Sidebar from "./components/Sidebar.vue";
 
@@ -37,7 +35,6 @@ export default defineComponent({
   components: {
     Header,
     MainNav,
-    // Alerts,
     // Sidebar,
   },
 });

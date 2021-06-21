@@ -2,11 +2,12 @@
   <section class="mt-4 p-2 glass">
     <div>
       <label
-        for="E-mail *"
+        for="email"
         class="flex text-sm font-medium leading-5 text-secondary my-2"
         >Email
       </label>
       <input
+        id="email"
         class="btn_auth"
         type="text"
         placeholder="Email Address"
@@ -28,12 +29,12 @@
     </div>
     <div>
       <label
-        for="Contraseña"
+        for="password"
         class="flex text-sm font-medium leading-5 text-secondary my-2"
         >Contraseña *
       </label>
       <input
-        id="Contraseña"
+        id="password"
         class="btn_auth"
         type="password"
         placeholder="Contraseña *"
@@ -244,17 +245,13 @@
       >Accepta los terminos y condiciones</span
     >
     <button
+      id="enterBtn"
       v-if="acceptTerms || isLogin"
       class="btn-form uppercase mt-4"
       @click="submitForm"
     >
       <span>{{ isLogin ? "Entrar" : "Activar" }}</span>
       <span></span>
-      <!-- <Loader
-          v-if="isSubmitting"
-          class="animate-spin stroke-current text-white ml-2"
-          :height="16"
-        /> -->
     </button>
   </section>
   <div class="text-lg leading-5 mt-4 text-center glass">
@@ -343,19 +340,17 @@
 </template>
 
 <script lang="ts">
-// import { mapActions, mapGetters } from "vuex";
-import ForgotPassword from "@/components/auth/ForgotPassword.vue";
 // VUE
 import { watch, defineComponent, reactive, computed } from "vue";
 // SETUP
-import { user, google, showForgotPopUp } from ".";
-// TS INTERFACE
-import IFormSchema from "@/components/auth/interface";
+import { login, signup, showForgotPopUp } from "@/components/auth/store";
+// VEE VALIDATE
 import { useField, useForm } from "vee-validate";
-import { login, signup } from "@/components/auth/index";
+//data from database
 import { workplaceList } from "@/components/auth/db";
-
+// COMPONENTS
 import Messager from "@/components/Messager.vue";
+import ForgotPassword from "@/components/auth/ForgotPassword.vue";
 
 export default defineComponent({
   name: "LoginForm",

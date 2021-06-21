@@ -183,7 +183,7 @@
 </template>
 
 <script lang="ts">
-import { errorMessage } from "@/components/auth";
+import { errorMessage } from "@/components/auth/store";
 import { ref, defineComponent, watch } from "vue";
 import {
   Dialog,
