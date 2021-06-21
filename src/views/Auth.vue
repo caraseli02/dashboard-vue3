@@ -15,6 +15,7 @@
           INICIAR SESIÓN
         </li>
         <li
+          id="authCreate"
           class="cursor-pointer ml-4 text-lg leading-5 text-secondary max-w p-1"
           @click="setIsLogin(false)"
           :class="{
