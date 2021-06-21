@@ -1,7 +1,7 @@
 // https://docs.cypress.io/api/introduction/api.html
 
-describe("My First Test", () => {
-  it("Login, redirect to dashboard and Logout", () => {
+describe("Auth Test", () => {
+  it("Make Login, on success will be redirect to dashboard and make Logout", () => {
     cy.visit("/");
     cy.url().should("include", "/auth");
 
@@ -13,7 +13,7 @@ describe("My First Test", () => {
       .should("have.value", "")
       .type("123456")
       .should("have.value", "123456");
-    cy.get("#enterBtn").click();
+    cy.get("#authBtn").click();
     cy.url().should("include", "/dashboard");
     cy.get("#btnLogout").click();
   });

@@ -245,7 +245,7 @@
       >Accepta los terminos y condiciones</span
     >
     <button
-      id="enterBtn"
+      id="authBtn"
       v-if="acceptTerms || isLogin"
       class="btn-form uppercase mt-4"
       @click="submitForm"
