@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import { watch } from "vue";
 import Home from "../views/Home.vue";
-import { user, initialised } from "@/components/auth";
+import { user, initialised } from "@/components/auth/store";
 
 const routes: Array<RouteRecordRaw> = [
   {
