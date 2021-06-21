@@ -31,7 +31,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
-import SignIn from "@/components/auth/SignIn.vue";
+import SignIn from "@/components/auth/Auth.vue";
 
 export default defineComponent({
   name: "Auth",

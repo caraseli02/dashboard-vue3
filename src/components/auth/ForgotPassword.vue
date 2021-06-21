@@ -67,7 +67,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
-import { resetPassword, showForgotPopUp } from ".";
+import { resetPassword, showForgotPopUp } from "@/components/auth/store";
 
 export default defineComponent({
   setup() {
