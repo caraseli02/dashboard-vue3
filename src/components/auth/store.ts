@@ -16,6 +16,12 @@ export const errorMessage = ref<string | null>(null);
 
 export const showForgotPopUp = ref<boolean>(false);
 
+export const isLogin = ref<boolean>(true);
+
+export const setIsLogin = (nextVal: boolean) => {
+  isLogin.value = nextVal;
+};
+
 auth.onAuthStateChanged((u) => {
   // ...
   initialised.value = true;

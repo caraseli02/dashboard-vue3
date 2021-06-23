@@ -18,7 +18,7 @@ defineRule("password", (value) => {
     return true;
   }
 
-  return "Mínimo 6 / Máximo 30";
+  return "La contraseña debe tener mín 6 y máx 30 caracteres";
 });
 
 defineRule("confirmPassword", (value, [target], ctx) => {
@@ -26,7 +26,7 @@ defineRule("confirmPassword", (value, [target], ctx) => {
     return true;
   }
 
-  return "Mínimo 6 caracteres. Máximo 30 caracteres";
+  return "Las contraseñas no coinciden";
 });
 
 defineRule("name", (value) => {
@@ -38,7 +38,7 @@ defineRule("name", (value) => {
     return true;
   }
 
-  return "Mínimo 3 caracteres. Máximo 30 caracteres";
+  return "El nombre debe tener mín 3 y máx 30 caracteres";
 });
 
 defineRule("surname", (value) => {
@@ -50,7 +50,7 @@ defineRule("surname", (value) => {
     return true;
   }
 
-  return "Mínimo 3 caracteres. Máximo 30 caracteres";
+  return "El apellido debe tener mín 3 y máx 30 caracteres";
 });
 
 defineRule("dni", (value) => {
@@ -62,7 +62,7 @@ defineRule("dni", (value) => {
     return true;
   }
 
-  return "Mínimo 6 caracteres. Máximo 12 caracteres";
+  return "El DNI debe tener mín 6 y máx 12 caracteres";
 });
 
 defineRule("workplace", (value) => {

@@ -64,6 +64,7 @@
           >Repetir contraseña *
         </label>
         <input
+          required
           id="Contraseña2"
           class="btn_auth"
           type="password"
@@ -218,7 +219,7 @@
           }"
           class="text-yellow-500"
         >
-          {{ dniField.errorMessage || "Debe rellenar este campo" }}
+          {{ workplaceField.errorMessage || "Debe rellenar este campo" }}
         </p>
       </div>
       <div class="flex mt-2 text-primary">
@@ -246,12 +247,19 @@
     >
     <button
       id="authBtn"
-      v-if="acceptTerms || isLogin"
+      v-if="isLogin"
       class="btn-form uppercase mt-4"
-      @click="submitForm"
+      @click="makeLogin"
     >
-      <span>{{ isLogin ? "Entrar" : "Activar" }}</span>
-      <span></span>
+      Entrar
+    </button>
+    <button
+      id="authBtn"
+      v-if="acceptTerms && !isLogin"
+      class="btn-form uppercase mt-4"
+      @click="makeRegister"
+    >
+      Activar
     </button>
   </section>
   <div class="text-lg leading-5 mt-4 text-center glass">
@@ -302,6 +310,7 @@
     </transition>
   </div>
   <div
+    v-if="isLogin"
     class="
       mt-4
       glass
@@ -312,14 +321,16 @@
       text-lg
       flex
       justify-center
+      items-center
       sm:mx-auto
       sm:rounded-xl
     "
   >
     ¿No tienes cuenta?
     <div
+      @click="setIsLogin(false)"
       class="
-        h-12
+        h-14
         cursor-pointer
         bg-secondary
         text-primary
@@ -343,7 +354,12 @@
 // VUE
 import { watch, defineComponent, reactive, computed } from "vue";
 // SETUP
-import { login, signup, showForgotPopUp } from "@/components/auth/store";
+import {
+  login,
+  signup,
+  showForgotPopUp,
+  setIsLogin,
+} from "@/components/auth/store";
 // VEE VALIDATE
 import { useField, useForm } from "vee-validate";
 //data from database
@@ -362,10 +378,6 @@ export default defineComponent({
     isLogin: {
       type: Boolean,
       default: true,
-    },
-    isSubmitting: {
-      type: Boolean,
-      default: false,
     },
   },
   emits: {
@@ -409,13 +421,11 @@ export default defineComponent({
         workplaceField.validate();
       }
     );
-    const submitForm = handleSubmit((formValues) => {
-      if (props.isLogin) {
-        login(formValues.email, formValues.password);
-      }
-      if (!props.isLogin) {
-        signup(formValues);
-      }
+    const makeLogin = handleSubmit((formValues) => {
+      login(formValues.email, formValues.password);
+    });
+    const makeRegister = handleSubmit((formValues) => {
+      signup(formValues);
     });
     return {
       emailField,
@@ -425,10 +435,12 @@ export default defineComponent({
       dniField,
       workplaceField,
       confirmPasswordField,
-      submitForm,
+      makeLogin,
+      makeRegister,
       formMeta,
       showForgotPopUp,
       workplaceList,
+      setIsLogin,
     };
   },
   data() {

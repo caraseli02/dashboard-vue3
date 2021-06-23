@@ -33,6 +33,7 @@
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 import SignIn from "@/components/auth/Auth.vue";
+import { isLogin, setIsLogin } from "../components/auth/store";
 
 export default defineComponent({
   name: "Auth",
@@ -40,10 +41,6 @@ export default defineComponent({
     SignIn,
   },
   setup() {
-    const isLogin = ref<boolean>(true);
-    const setIsLogin = (nextVal: boolean) => {
-      isLogin.value = nextVal;
-    };
     return {
       isLogin,
       setIsLogin,

@@ -1,15 +1,6 @@
 <template>
   <section class="glass mt-2 p-2 flex justify-center items-center flex-col">
-    <h1
-      class="
-        text-center
-        mb-4
-        mx-8
-        glass-${theme}
-        text-xs text-primary
-        font-bold
-      "
-    >
+    <h1 class="text-center mb-4 mx-8 glass text-xs text-secondary font-bold">
       SI HAS OLVIDADO TU CONTRASEÑA, PROPORCIONA TU DIRECCIÓN DE CORREO
       ELECTRÓNICO Y TE ENVIAREMOS UN EMAIL CON INSTRUCCIONES DE CÓMO
       RECUPERARLA.
