@@ -16,7 +16,7 @@ describe("Register Test", () => {
     cy.contains("El DNI debe tener mín 6 y máx 12 caracteres");
     cy.contains("Elige centro de trabajo");
   });
-  it("Register, redirect to dashboard and Logout", () => {
+  it.only("Register, redirect to dashboard and Logout", () => {
     cy.visit("/");
     cy.url().should("include", "/auth");
     cy.get("#authCreate").click();

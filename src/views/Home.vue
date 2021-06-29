@@ -57,7 +57,7 @@ export default defineComponent({
         {
           text: "Operarios",
           path: "/users",
-          iconName: "profile",
+          iconName: "user-list",
         },
       ],
       // links: [

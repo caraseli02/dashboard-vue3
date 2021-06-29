@@ -16,12 +16,13 @@ describe("Login Test", () => {
       .should("have.value", "123456");
     cy.get("#authBtn").click();
     cy.url().should("include", "/dashboard");
-    cy.get("#btnLogout").click();
+    cy.get(".gg-profile").click();
+    cy.get("#deleteUser").click();
   });
   it("Show error on wrong password or email", () => {
     cy.get("#authBtn").click();
     cy.contains("Email no valido. Solo @apimosa se acceptan.");
-    cy.contains("Mínimo 6 / Máximo 30");
+    cy.contains("La contraseña debe tener mín 6 y máx 30 caracteres");
     cy.get("#email")
       .should("have.value", "")
       .type("test@apimosa.ess")
