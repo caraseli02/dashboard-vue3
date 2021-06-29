@@ -25,6 +25,6 @@
     "tests/**/*.ts",
     "tests/**/*.tsx",
     "src/validators.js"
-  ],
+, "src/use-collections.ts", "tests/e2e/support/commands.js"  ],
   "exclude": ["node_modules"]
 }

@@ -1,6 +1,7 @@
 import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
+import { onMounted, ref } from "vue";
 
 const firebaseConfig = {
   apiKey: process.env.VUE_APP_API_KEY,
@@ -17,3 +18,14 @@ const firebaseApp = firebase.initializeApp(firebaseConfig);
 
 export const auth = firebaseApp.auth();
 export const db = firebaseApp.firestore();
+
+interface UserType {
+  author: string;
+  dni: string;
+  eatHour: boolean;
+  email: string;
+  name: string;
+  schedule: string;
+  surname: string;
+  workplace: string;
+}

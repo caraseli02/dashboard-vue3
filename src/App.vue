@@ -1,7 +1,7 @@
 <template>
   <section :class="`container light_bg pb-12`">
     <Header />
-    <!-- <Sidebar /> -->
+    <Sidebar v-if="user" />
     <main :class="user ? 'lg:pl-24' : ''" class="container mx-auto py-5">
       <router-view v-slot="{ Component }">
         <transition name="slide-fade" mode="out-in">
@@ -26,7 +26,7 @@ import { user } from "@/components/auth/store";
 import Header from "./components/Navigation/Header.vue";
 import MainNav from "@/components/dashboard/MainNav.vue";
 
-// import Sidebar from "./components/Sidebar.vue";
+import Sidebar from "@/components/Sidebar.vue";
 
 export default defineComponent({
   setup() {
@@ -35,7 +35,7 @@ export default defineComponent({
   components: {
     Header,
     MainNav,
-    // Sidebar,
+    Sidebar,
   },
 });
 </script>

@@ -3,13 +3,27 @@
     <div class="mx-auto flex justify-center items-center">
       <nav class="flex items-center justify-between md:justify-between w-full">
         <!-- PROFILE ICON FOR OPEN/CLOSE SIDEBAR -->
-        <!-- <div v-if="user" @click="toggleSidebar" class="flex items-center ml-2">
+        <div
+          data-cy="sidebarBtn"
+          v-if="user"
+          @click="toggleSidebar"
+          class="flex items-center"
+        >
           <button
-            class="flex justify-center items-center p-3 rounded-lg z-20"
-            :class="showSidebar ? 'bg-gray-300' : 'text-primary bg-primary'"
+            class="
+              flex
+              justify-center
+              items-center
+              p-3
+              rounded-lg
+              z-20
+              bg-primary
+            "
             aria-label="Open Menu"
-          ></button>
-        </div> -->
+          >
+            <i class="gg-profile text-primary"></i>
+          </button>
+        </div>
         <!-- Home, Sing-In Sign-Up Btn -->
         <section class="flex justify-between items-center">
           <!-- Side Bar -->
@@ -46,7 +60,7 @@
 import { defineComponent } from "vue";
 import ThemeToggler from "@/components/Navigation/ThemeToggler.vue";
 import { user, logout } from "@/components/auth/store";
-// import { mapGetters, mapActions, mapState } from "vuex";
+import { showSidebar, toggleSidebar } from "./store";
 
 interface Link {
   name: string;
@@ -56,7 +70,7 @@ interface Link {
 export default defineComponent({
   name: "Header",
   setup() {
-    return { user, logout };
+    return { user, logout, toggleSidebar, showSidebar };
   },
   components: { ThemeToggler },
   computed: {

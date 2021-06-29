@@ -24,9 +24,16 @@
       </linearGradient>
     </defs>
   </svg> -->
-  <div id="page" :class="nightMode ? 'theme-dark' : ''">
-    <input type="checkbox" id="theme-toggle" v-model="nightMode" />
-    <label @click="toggleTheme" for="theme-toggle"><span></span></label>
+  <div id="page" class="w-12 h-full relative">
+    <span
+      class="w-12 h-full flex justify-center items-center"
+      @click="toggleTheme"
+    >
+      <transition name="slide-fade" mode="out-in">
+        <i v-if="nightMode" class="gg-moon text-purple-600"></i>
+        <i v-else class="gg-sun text-yellow-100"></i>
+      </transition>
+    </span>
   </div>
   <!-- <svg
     width="24"
@@ -66,13 +73,7 @@ export default defineComponent({
       }
     };
 
-    onMounted(themeInnit);
-    return {
-      nightMode,
-    };
-  },
-  methods: {
-    toggleTheme(): void {
+    const toggleTheme = () => {
       let htmlClasses = document.querySelector("html")!.classList;
       if (localStorage.theme == "dark") {
         htmlClasses.remove("dark");
@@ -81,7 +82,16 @@ export default defineComponent({
         htmlClasses.add("dark");
         localStorage.theme = "dark";
       }
-    },
+      nightMode.value = !nightMode.value;
+
+      console.log(nightMode.value);
+    };
+
+    onMounted(themeInnit);
+    return {
+      nightMode,
+      toggleTheme,
+    };
   },
 });
 </script>
