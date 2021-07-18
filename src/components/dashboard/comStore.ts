@@ -104,17 +104,23 @@ export const usersList: UsersList = reactive({
 });
 // export const userData: UserData = reactive(userData);
 
-export const timeConvert = (n: number): string => {
-  const num = n;
-  const hours = num / 60;
-  const rhours = Math.floor(hours);
-  const minutes = (hours - rhours) * 60;
-  const rminutes = Math.round(minutes);
-  if (rminutes > 9 && rminutes <= 55) {
-    return `${rhours}h ${Math.ceil(rminutes / 5) * 5}m`;
+export const timeConvert = (
+  enterTime: any,
+  leaveTime: any,
+  userData: any
+): string => {
+  let hours = leaveTime.slice(11, 13) - enterTime.slice(11, 13);
+  const minutes = leaveTime.slice(14, 16) - enterTime.slice(14, 16);
+
+  const dateForCheck = new Date(String(enterTime).slice(0, 16));
+
+  const isWeekends = dateForCheck.getDay() === 0 || dateForCheck.getDay() === 6;
+
+  const isCurentMonth = dateForCheck.getMonth() === new Date().getMonth();
+
+  if (userData.value.eatHour && hours > 9 && !isWeekends) {
+    hours -= 1;
   }
-  if (rminutes > 55) {
-    return `${rhours + 1}h`;
-  }
-  return `${rhours}h`;
+
+  return `${hours} h ${minutes} m`;
 };

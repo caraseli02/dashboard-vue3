@@ -1,5 +1,8 @@
 <template lang="">
-  <ul v-if="userData" class="w-24 grid grid-flow-row grid-rows-4 ml-1">
+  <ul
+    v-if="userData"
+    class="w-24 grid grid-flow-row grid-rows-4 ml-1 border-l-2"
+  >
     <li
       class="
         w-20
@@ -108,26 +111,18 @@
       "
     >
       <div class="flex justify-center items-center">
-        <i class="gg-time mb-2 text-green-800 dark:text-green-500"></i>
-        <span class="text-gray-700 dark:text-gray-300 mr-1 ml-2 text-center">
-          {{ workedTime }}h
+        <span
+          v-if="workedTime"
+          class="text-gray-700 dark:text-gray-300 mr-1 ml-2 text-center"
+        >
+          {{ workedTime }}
         </span>
+        <i v-else class="gg-time mb-2 text-green-800 dark:text-green-500"></i>
       </div>
     </li>
     <li class="h-10 flex justify-center items-center text-purple-800 my-2">
       <i
-        class="
-          gg-mail
-          mx-4
-          self-center
-          shadow-lg
-          text-green-700
-          dark:text-green-400
-          rounded-lg
-          w-full
-          p-1
-          h-8
-        "
+        class="gg-mail self-center shadow-lg text-green-700 dark:text-green-400"
       >
       </i>
       <!-- <span class="text-xs mx-4 text-center text-secondary" v-else
@@ -137,7 +132,7 @@
   </ul>
 </template>
 <script lang="ts">
-import { defineComponent, computed, inject } from "vue";
+import { defineComponent, computed } from "vue";
 import { days, usersList, timeConvert } from "@/components/dashboard/comStore";
 
 export default defineComponent({
@@ -159,14 +154,10 @@ export default defineComponent({
     });
     const workedTime = computed(() => {
       if (props.attend.closedAt) {
-        const seconds =
-          props.attend.closedAt.seconds - props.attend.createdAt.seconds;
-        var minutes = Math.floor(seconds / 60);
-        console.log(minutes);
-
-        return "1";
+        const { enterTime, leaveTime } = props.attend.data;
+        return timeConvert(enterTime, leaveTime, userData);
       } else {
-        return "0";
+        return null;
       }
     });
     function nameTransform(value: string): string {
