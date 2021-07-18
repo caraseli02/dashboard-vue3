@@ -17,9 +17,7 @@
           px-4
           pb-20
           text-center
-          sm:block
-          sm:p-0
-          sm:min-h-screen
+          sm:block sm:p-0 sm:min-h-screen
         "
       >
         <TransitionChild
@@ -60,10 +58,7 @@
               overflow-hidden
               transform
               transition-all
-              sm:my-8
-              sm:align-middle
-              sm:max-w-lg
-              sm:w-full
+              sm:my-8 sm:align-middle sm:max-w-lg sm:w-full
             "
           >
             <div
@@ -74,8 +69,7 @@
                 px-4
                 pt-5
                 pb-4
-                sm:p-6
-                sm:pb-4
+                sm:p-6 sm:pb-4
               "
             >
               <div class="sm:flex sm:items-start">
@@ -89,9 +83,7 @@
                     w-12
                     rounded-full
                     bg-red-100
-                    sm:mx-0
-                    sm:h-10
-                    sm:w-10
+                    sm:mx-0 sm:h-10 sm:w-10
                   "
                 >
                   <i class="gg-danger"></i>
@@ -116,8 +108,7 @@
                 bg-transparent
                 px-4
                 py-3
-                sm:px-6
-                sm:flex sm:flex-row-reverse
+                sm:px-6 sm:flex sm:flex-row-reverse
               "
             >
               <!-- <button
@@ -163,11 +154,10 @@
                   text-primary
                   hover:bg-gray-50
                   focus:outline-none
-                  focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500
-                  sm:mt-0
-                  sm:ml-3
-                  sm:w-auto
-                  sm:text-sm
+                  focus:ring-2
+                  focus:ring-offset-2
+                  focus:ring-indigo-500
+                  sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm
                 "
                 @click="(open = false), (errorMessage = null)"
                 ref="cancelButtonRef"
@@ -183,7 +173,7 @@
 </template>
 
 <script lang="ts">
-import { errorMessage } from "@/components/auth/store";
+import { errorMessage } from "@/components/auth/comStore";
 import { ref, defineComponent, watch } from "vue";
 import {
   Dialog,

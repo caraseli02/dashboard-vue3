@@ -3,8 +3,15 @@
 @tailwind utilities;
 
 @layer components {
+  .neomorph {
+    box-shadow: 6px 6px 8px 0 rgba(0, 0, 0, 0.25),
+      -4px -4px 6px 0 rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    @apply bg-blue-200 dark:bg-blue-700
+  }
+
   .glass {
-    @apply glassmorphism-25 p-3 md:p-6 rounded-lg;
+    @apply glassmorphism-50 p-3 md:p-6 rounded-lg;
   }
 
   .btn-home {
@@ -85,7 +92,7 @@
 
 .dark {
   --color-bg-primary: #17224d;
-  --color-bg-secondary: #022177;
+  --color-bg-secondary: #0538c4;
   --color-text-primary: #cccccc;
   --color-text-secondary: #9ca3af;
   --color-text-accent: #475886;

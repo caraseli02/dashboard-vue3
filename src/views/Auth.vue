@@ -33,7 +33,7 @@
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 import SignIn from "@/components/auth/Auth.vue";
-import { isLogin, setIsLogin } from "../components/auth/store";
+import { isLogin, setIsLogin } from "../components/auth/comStore";
 
 export default defineComponent({
   name: "Auth",

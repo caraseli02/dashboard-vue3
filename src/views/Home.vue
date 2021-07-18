@@ -33,7 +33,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { user } from "@/components/auth/store";
+import { user } from "@/components/auth/comStore";
 
 interface Link {
   text: string;

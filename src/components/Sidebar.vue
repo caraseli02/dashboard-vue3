@@ -232,13 +232,21 @@
 <script lang="ts">
 import legalLinks from "@/views/Legal/legalLinks.vue";
 import { defineComponent, ref, watch, computed } from "vue";
-import { showSidebar, toggleSidebar } from "@/components/Navigation/store";
-import { user, logout } from "@/components/auth/store";
+import { showSidebar, toggleSidebar } from "@/components/navigation/comStore";
+import { user, logout } from "@/components/auth/comStore";
 import useFirestore from "../index";
 import firebase from "firebase/app";
 import "firebase/auth";
 
 export default defineComponent({
+  props: {
+    workplace: {
+      type: [Array, String],
+    },
+    selectedWorkplace: {
+      type: String,
+    },
+  },
   setup() {
     const profileImg = ref<string>("@/assets/img/apimosa.png");
     const uid = ref(user.value!.uid);
@@ -277,7 +285,6 @@ export default defineComponent({
       let workplaces = Object.values(data.value.workplace);
       workplaces = workplaces.filter((item) => item !== value);
       workplaces.unshift(value);
-      console.log(workplaces);
 
       await updateDoc({
         workplace: workplaces,

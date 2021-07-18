@@ -22,8 +22,8 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { user } from "@/components/auth/store";
-import Header from "./components/Navigation/Header.vue";
+import { user } from "@/components/auth/comStore";
+import Header from "@/components/navigation/Header.vue";
 import MainNav from "@/components/dashboard/MainNav.vue";
 
 import Sidebar from "@/components/Sidebar.vue";

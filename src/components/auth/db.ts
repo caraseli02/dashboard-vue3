@@ -17,5 +17,3 @@ const getWorkplaces = docRef
   .catch((error) => {
     console.log("Error getting document:", error);
   });
-
-console.log(workplaceList);

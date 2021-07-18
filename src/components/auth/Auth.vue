@@ -266,8 +266,7 @@
     <button
       class="
         text-base text-primary
-        focus:outline-none
-        focus:underline
+        focus:outline-none focus:underline
         transition
         ease-in-out
         duration-150
@@ -322,8 +321,7 @@
       flex
       justify-center
       items-center
-      sm:mx-auto
-      sm:rounded-xl
+      sm:mx-auto sm:rounded-xl
     "
   >
     ¿No tienes cuenta?
@@ -359,7 +357,7 @@ import {
   signup,
   showForgotPopUp,
   setIsLogin,
-} from "@/components/auth/store";
+} from "@/components/auth/comStore";
 // VEE VALIDATE
 import { useField, useForm } from "vee-validate";
 //data from database

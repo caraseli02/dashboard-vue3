@@ -58,7 +58,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
-import { resetPassword, showForgotPopUp } from "@/components/auth/store";
+import { resetPassword, showForgotPopUp } from "@/components/auth/comStore";
 
 export default defineComponent({
   setup() {
@@ -86,12 +86,3 @@ export default defineComponent({
   },
 });
 </script>
-
-// export default { // data() { // return { // email: "", // error: null, //
-emailSending: false, // }; // }, // methods: { // sendEmail() { // if
-(!this.email) { // this.error = "Please type in a valid email address."; //
-return; // } // this.error = null; // this.emailSending = true; // this.$store
-// .dispatch("auth/resetPassword", this.email) // .then(() => { //
-this.emailSending = false; // this.$emit("closePopUp", false); //
-this.$alert("Enviando"); // }) // .catch(error => { // this.emailSending =
-false; // this.error = error.message; // }); // }, // }, // };

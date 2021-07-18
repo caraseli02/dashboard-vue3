@@ -58,9 +58,9 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import ThemeToggler from "@/components/Navigation/ThemeToggler.vue";
-import { user, logout } from "@/components/auth/store";
-import { showSidebar, toggleSidebar } from "./store";
+import ThemeToggler from "@/components/navigation/ThemeToggler.vue";
+import { user, logout } from "@/components/auth/comStore";
+import { showSidebar, toggleSidebar } from "@/components/navigation/comStore";
 
 interface Link {
   name: string;
