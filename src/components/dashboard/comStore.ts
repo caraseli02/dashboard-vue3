@@ -44,6 +44,7 @@ interface attendData {
   leaveTime: string;
   temperature: string;
   uid: string;
+  msg?: string;
 }
 interface UsersList {
   data: UserData[];
@@ -104,6 +105,7 @@ export const usersList: UsersList = reactive({
 });
 // export const userData: UserData = reactive(userData);
 
+// Calculate total worked time for day
 export const timeConvert = (
   enterTime: any,
   leaveTime: any,

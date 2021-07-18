@@ -122,12 +122,21 @@
     </li>
     <li class="h-10 flex justify-center items-center text-purple-800 my-2">
       <i
-        class="gg-mail self-center shadow-lg text-green-700 dark:text-green-400"
+        v-if="attend.data.msg"
+        class="
+          gg-mail
+          cursor-pointer
+          self-center
+          shadow-lg
+          text-green-700
+          dark:text-green-400
+        "
+        @click="showMsg(attend.data.msg)"
       >
       </i>
-      <!-- <span class="text-xs mx-4 text-center text-secondary" v-else
+      <span v-else class="text-xs mx-4 text-center text-secondary"
         >No tiene Mensajes</span
-      > -->
+      >
     </li>
   </ul>
 </template>
@@ -172,6 +181,9 @@ export default defineComponent({
       const name = speaker.split(" ");
       return `${name[0].charAt(0)}${name[1] ? name[1].charAt(0) : ""}`;
     }
+    function showMsg(msg: string) {
+      window.alert(msg);
+    }
     const getDayName = computed(() => {
       return days.value[day];
     });
@@ -186,6 +198,7 @@ export default defineComponent({
       enterTime,
       leaveTime,
       workedTime,
+      showMsg,
     };
   },
   props: {
