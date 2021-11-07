@@ -66,7 +66,7 @@
     ease-in-out
     font-bold
     shadow-lg
-    w-1/2;
+    w-1/3;
   }
   .selectForm {
     @apply block
@@ -94,7 +94,7 @@
   --color-bg-primary: #17224d;
   --color-bg-secondary: #0538c4;
   --color-text-primary: #cccccc;
-  --color-text-secondary: #9ca3af;
+  --color-text-secondary: #3333af;
   --color-text-accent: #475886;
 }
 

@@ -2,6 +2,7 @@
   <div v-if="!loading" class="flex flex-col h-full">
     <div class="w-full px-4">
       <monthSelector />
+      <!-- WorkPlace and Users select -->
       <section
         class="
           flex
@@ -16,8 +17,9 @@
         <attendAdminPlaces v-model="selectedWorkplace" />
         <attendAdminUsers v-model="selectedUser" />
       </section>
+      <!-- Gmaps/AttendData Toggler and Today/Month Toggler -->
       <section class="flex w-full h-full md:mt-4">
-        <sidebarToggler @click="showMaps = !showMaps" :showMaps="showMaps" />
+        <mapsToggler @click="showMaps = !showMaps" :showMaps="showMaps" />
         <!-- Month / Day Selector -->
         <monthDaySelect
           @click="showMonthAttends = !showMonthAttends"
@@ -28,7 +30,8 @@
           :showMonthAttends="showMonthAttends"
         />
       </section>
-      <div
+      <!-- Attends Info Cards, Attend and Gmaps -->
+      <section
         v-if="!loading"
         class="overflow-hidden lg:overflow-visible pb-8 lg:pb-0"
       >
@@ -44,14 +47,6 @@
                 class="flex justify-between items-center space-x-4"
                 :selectedUser="selectedUser"
               />
-              <!-- Attend Day Selector -->
-              <!-- <attendDaySelector
-                v-show="!selectedUser || selectedUser === 'allData'"
-                :workedDaysList="workedDaysList"
-                :theme="theme"
-                :filtredAttendsDay="filtredAttendsDay"
-                v-on:sendDay="setAttendDay($event)"
-              /> -->
               <!-- Attend Rows -->
               <transition-group
                 class="grid grid-flow-col auto-cols-max overflow-y-scroll mt-2"
@@ -79,7 +74,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </section>
       <div v-else class="mx-10 mt-10 h-64">
         <div class="animate-pulse flex flex-col space-x-4">
           <div class="flex-1 space-y-4 py-1">
@@ -105,11 +100,12 @@
 import attendRow from "@/components/dashboard/attendRow.vue";
 import infoCards from "@/components/dashboard/infoCards.vue";
 import monthSelector from "@/components/dashboard/monthSelector.vue";
-import sidebarToggler from "@/components/dashboard/gmapsToggler.vue";
+import mapsToggler from "@/components/dashboard/gmapsToggler.vue";
 import monthDaySelect from "@/components/dashboard/monthDaySelect.vue";
 import gMaps from "@/components/dashboard/gMaps.vue";
 import attendAdminPlaces from "@/components/attendAdminPlaces.vue";
 import attendAdminUsers from "@/components/attendAdminUsers.vue";
+
 import { defineComponent, ref, provide, watch, computed } from "vue";
 import { uid } from "@/components/dashboard/comStore";
 import useFirestore from "../index";
@@ -242,7 +238,7 @@ export default defineComponent({
     monthSelector,
     attendAdminPlaces,
     attendAdminUsers,
-    sidebarToggler,
+    mapsToggler,
     monthDaySelect,
     gMaps,
   },

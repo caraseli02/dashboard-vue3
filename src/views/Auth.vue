@@ -7,7 +7,7 @@
       <ul class="inline-flex justify-center items-center glass p-1">
         <li
           @click="setIsLogin(true)"
-          class="cursor-pointertext-lg leading-5 text-secondary max-w p-2"
+          class="cursor-pointertext-lg leading-5 text-primary max-w p-2"
           :class="{
             'bg-secondary text-primary shadow-lg rounded-lg': !isLogin,
           }"
@@ -16,7 +16,7 @@
         </li>
         <li
           id="authCreate"
-          class="cursor-pointer ml-4 text-lg leading-5 text-secondary max-w p-1"
+          class="cursor-pointer ml-4 text-lg leading-5 text-primary max-w p-1"
           @click="setIsLogin(false)"
           :class="{
             'bg-secondary text-primary shadow-lg p-1 rounded-lg': isLogin,

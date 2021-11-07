@@ -248,7 +248,7 @@
     <button
       id="authBtn"
       v-if="isLogin"
-      class="btn-form uppercase mt-4"
+      class="btn-form uppercase"
       @click="makeLogin"
     >
       Entrar
